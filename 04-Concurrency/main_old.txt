@@ -1,0 +1,43 @@
+package main_old
+
+import (
+	"fmt"
+)
+
+func wait_and_print(msg string, doneChan chan bool) {
+	// time.Sleep(2 * time.Second)
+	fmt.Println(msg)
+	doneChan <- true
+}
+
+func print(msg string, doneChan chan bool) {
+	fmt.Printf("This is the message %v", msg)
+	doneChan <- true
+	close(doneChan)
+}
+
+//	func main() {
+//		go fmt.Println("Message 1")
+//		go fmt.Println("MEssage 2")
+//		go wait_and_print("Message 3")
+//		go fmt.Println("Message 4")
+//	}
+
+// this example prints the items arbitrarily
+//
+//	func main() {
+//		done := make(chan bool)
+//		go wait_and_print("Hello there", done)
+//		go print("Bye there", done)
+//		<-done
+//	}
+//
+// <-channel_name waits for the channel to publish
+func main() {
+	done := make(chan bool)
+	go print("Thank you", done)
+
+	for range done {
+
+	}
+}
