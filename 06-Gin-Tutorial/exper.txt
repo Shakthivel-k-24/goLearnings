@@ -1,0 +1,13 @@
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	server := gin.Default()
+	server.GET("/", func(ginc *gin.Context) { ginc.JSON(http.StatusAccepted, gin.H{"map": "hello there"}) })
+	server.Run(":8090")
+}
