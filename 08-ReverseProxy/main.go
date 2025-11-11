@@ -8,6 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func construct_proxy(c *gin.Context) {
+
+}
 func proxy(c *gin.Context) {
 	remote, err := url.Parse("https://webhook.site/d98a8160-50a8-4f26-b68a-8e53989f3fd8")
 	if err != nil {
@@ -21,6 +24,7 @@ func proxy(c *gin.Context) {
 		req.URL.Scheme = remote.Scheme
 		req.URL.Host = remote.Host
 		req.URL.Path = remote.Path + c.Param("proxyPath")
+		req.URL.RawQuery = c.Request.URL.RawQuery
 	}
 
 	proxy.ServeHTTP(c.Writer, c.Request)
@@ -29,8 +33,8 @@ func proxy(c *gin.Context) {
 func main() {
 
 	r := gin.Default()
-
-	r.Any("/*proxyPath", proxy)
+	proxystr := "/*proxyPath"
+	r.Any(proxystr, proxy)
 
 	r.Run(":8080")
 }
