@@ -1,0 +1,9 @@
+POST http://localhost:8080/post
+Content-Type:  application/json
+
+{
+    "key1":"value1",
+    "key2":"value2"
+}
+### 
+GET https://b4e90919-50f2-4fa9-93c9-a5286635217d.mock.pstmn.io/ping
